@@ -1,36 +1,48 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const { Sequelize } = require('sequelize');
 const cors = require('cors');
-const Cours = require('./models/Cours'); // Import the 'cours' model
-const Lecon = require('./models/Lecon'); // Import the 'lecon' model
+const  Sequelize  = require('sequelize');
+ // Import the Sequelize instance from database.js
+const Cours = require('./models/Cours');
+const Lecon = require('./models/Lecon');
+const coursRoutes = require('./routes/coursRoutes'); // Import the 'cours' routes
+const leconRoutes = require('./routes/leconRoutes'); // Import the 'lecon' routes
 
-// Load environment variables from .env file
-dotenv.config();
-
-// Create an instance of Express
 const app = express();
 
 // Enable CORS
 app.use(cors());
-
-// Create a Sequelize instance with the database connection details
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+const sequelize = new Sequelize({
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
-  dialect: 'mysql',
+  dialect: 'mysql', // or your preferred database dialect
 });
+
+sequelize
+  .sync() // Synchronize the models with the database
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Error synchronizing models with the database:', error);
+  });
+// Synchronize the models with the database
+Cours.init(sequelize);
+Lecon.init(sequelize);
 
 // Define the relationship between 'cours' and 'lecon'
 Cours.hasMany(Lecon, { foreignKey: 'idcours' });
 Lecon.belongsTo(Cours, { foreignKey: 'idcours' });
 
-// Synchronize the models with the database
-sequelize.sync();
+// Include the 'cours' and 'lecon' routes
+app.use('/api', coursRoutes);
+app.use('/api', leconRoutes);
 
-// Your routes and application logic can go here
-
-// Start the Express server
 const port = process.env.PORT || 3000;
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

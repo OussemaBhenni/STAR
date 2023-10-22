@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Import your database connection
+const sequelize = require('../database'); // Import your database connection this give erore
 
 const Cours = sequelize.define('cours', {
   idCours: {

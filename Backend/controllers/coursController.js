@@ -13,12 +13,15 @@ async function createCours(data) {
 // Get a list of all 'cours'
 async function getAllCours() {
   try {
-    const cours = await Cours.findAll();
+    console.log("here");
+    const cours = await Cours.findAll(); // Note the 'await' here
+    console.log(cours);
     return cours;
   } catch (error) {
     throw error;
   }
 }
+
 
 // Update an existing 'cours' by ID
 async function updateCours(id, data) {

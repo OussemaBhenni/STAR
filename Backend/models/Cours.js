@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../database'); // Import your database connection this give erore
+const sequelize = require('../database'); // Import your database connection 
 
 const Cours = sequelize.define('cours', {
   idCours: {
@@ -22,6 +22,9 @@ const Cours = sequelize.define('cours', {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
+  
+}, {
+  timestamps: false, // Disable timestamps
 });
 
 module.exports = Cours;

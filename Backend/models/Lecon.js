@@ -19,6 +19,8 @@ const Lecon = sequelize.define('lecon', {
   duree: {
     type: DataTypes.INTEGER,
   },
+}, {
+  timestamps: false, // Disable timestamps
 });
 
 module.exports = Lecon;

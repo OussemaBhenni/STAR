@@ -1,1 +1,1 @@
-npm install express mysql2 sequelize dotenv cors
+npm install express mysql sequelize dotenv cors

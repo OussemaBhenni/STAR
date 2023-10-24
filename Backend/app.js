@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 
+
 const app = express();
 const coursRoutes = require('./routes/coursRoutes'); // Import the 'cours' routes
 const leconRoutes = require('./routes/leconRoutes'); // Import the 'lecon' routes

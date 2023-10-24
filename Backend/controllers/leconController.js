@@ -14,7 +14,7 @@ async function createLecon(req, res) {
 async function getAllLecon(req, res) {
   try {
     const lecon = await Lecon.findAll();
-    res.json(lecon);
+    res.status(200).json(lecon);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -30,7 +30,7 @@ async function updateLecon(req, res) {
     }
 
     await lecon.update(req.body);
-    res.json(lecon);
+    res.status(200).json(lecon);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

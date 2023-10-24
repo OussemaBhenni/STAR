@@ -7,6 +7,9 @@ const Lecon = sequelize.define('lecon', {
     allowNull: false,
     primaryKey: true,
   },
+  ordre: {
+    type: DataTypes.INTEGER,
+  },
   titre: {
     type: DataTypes.STRING,
   },
@@ -19,7 +22,12 @@ const Lecon = sequelize.define('lecon', {
   duree: {
     type: DataTypes.INTEGER,
   },
+  idCours: {
+    type: DataTypes.INTEGER,
+    foreignKey: true,
+  },
 }, {
+  tableName: 'lecon',
   timestamps: false, // Disable timestamps
 });
 

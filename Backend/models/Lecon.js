@@ -31,4 +31,7 @@ const Lecon = sequelize.define('lecon', {
   timestamps: false, // Disable timestamps
 });
 
+
+
+
 module.exports = Lecon;

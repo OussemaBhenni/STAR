@@ -3,10 +3,25 @@ const Lecon = require('../models/Lecon'); // Import the 'lecon' model
 // Create a new 'lecon'
 async function createLecon(req, res) {
   try {
-    const lecon = await Lecon.create(req.body);
+    const lecon = req.body ;
+    const ord =await findMaxOrdreForCours(lecon.idCours);
+    lecon.ordre = ord == 1 ? 1:ord+1;
+    console.log(ord);
+    await Lecon.create(lecon);
     res.json(lecon);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+}
+
+async function findMaxOrdreForCours(idCours) {
+  try {
+    const maxOrdre = await Lecon.max('ordre', {
+      where: { idCours },
+    }) ;
+    return maxOrdre;
+  } catch (error) {
+    throw new Error(`Error finding max ordre: ${error.message}`);
   }
 }
 

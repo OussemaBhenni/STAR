@@ -3,9 +3,8 @@ const Cours = require('../models/Cours'); // Import the 'cours' model
 // Create a new 'cours'
 async function createCours(req, res) {
   try {
-    //console.log(req.body);
-    const cours = await Cours.create(req.body);
-    res.status(200).json(cours);
+    const cours = req.body ;
+    res.status(200).json(await Cours.create(cours));
     return cours;
   } catch (error) {
     res.status(500).json({ message: error.message });

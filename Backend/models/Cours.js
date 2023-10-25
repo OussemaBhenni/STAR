@@ -4,7 +4,7 @@ const sequelize = require('../database'); // Import your database connection
 const Cours = sequelize.define('cours', {
   idCours: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    autoIncrement: true,
     primaryKey: true,
   },
   titre: {

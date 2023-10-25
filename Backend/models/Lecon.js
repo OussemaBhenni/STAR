@@ -4,7 +4,7 @@ const sequelize = require('../database'); // Import your database connection
 const Lecon = sequelize.define('lecon', {
   idLecon: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    autoIncrement: true,
     primaryKey: true,
   },
   ordre: {

@@ -4,8 +4,9 @@ const Lecon = require('../models/Lecon'); // Import the 'lecon' model
 async function createLecon(req, res) {
   try {
     const lecon = req.body ;
+    console.log(lecon.idCours);
     const ord =await findMaxOrdreForCours(lecon.idCours);
-    lecon.ordre = ord == 1 ? 1:ord+1;
+    lecon.ordre = ord == null ? 1:ord+1;
     console.log(ord);
     await Lecon.create(lecon);
     res.json(lecon);

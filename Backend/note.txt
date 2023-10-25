@@ -3,3 +3,24 @@ npm install express mysql sequelize dotenv cors
 
 
 template front https://www.free-css.com/free-css-templates/page230/learn
+
+
+
+http://localhost:3003/api/cours   {
+        
+        "titre": "fgh",
+        "description": "fghfgh",
+        "duree": 33,
+        "nbrDeVue": 33
+    }
+
+
+    http://localhost:3003/api/lecon
+      {
+        
+        "titre": "chapitre 1",
+        "description": "the best chapter ever",
+        "contenu": "videoo",
+        "duree": 33,
+        "idCours": 2
+    }

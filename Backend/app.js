@@ -10,6 +10,7 @@ const leconRoutes = require('./routes/leconRoutes'); // Import the 'lecon' route
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,

@@ -1,4 +1,4 @@
-npm install express mysql sequelize dotenv cors
+npm install express mysql sequelize dotenv cors multer
 
 
 

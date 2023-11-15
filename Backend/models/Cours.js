@@ -22,6 +22,10 @@ const Cours = sequelize.define('cours', {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
+  image: {
+    type: DataTypes.TEXT,
+    defaultValue: null,
+  },
   
 }, {
   timestamps: false, // Disable timestamps

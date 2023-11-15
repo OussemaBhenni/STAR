@@ -1,10 +1,13 @@
 const express = require('express');
+const multer = require('multer');
+const storage = multer.memoryStorage(); // or use diskStorage if you want to save to disk
+const upload = multer({ storage: storage });
 const coursController = require('../controllers/coursController');
 
 const router = express.Router();
 
 // Create a new 'cours'
-router.post('/cours', coursController.createCours);
+router.post('/cours', upload.single('file'), coursController.createCours);
 
 // Get a list of all 'cours'
 router.get('/cours', coursController.getAllCours);

@@ -1,25 +1,50 @@
-const Lecon = require('../models/Lecon'); // Import the 'lecon' model
+const Lecon = require("../models/Lecon"); // Import the 'lecon' model
+const path = require("path");
+const fs = require("fs");
 
 // Create a new 'lecon'
 async function createLecon(req, res) {
   try {
-    const lecon = req.body ;
-    console.log(lecon.idCours);
-    const ord =await findMaxOrdreForCours(lecon.idCours);
-    lecon.ordre = ord == null ? 1:ord+1;
-    console.log(ord);
+    
+    const lecon = req.body;
+    console.log(lecon);
+    const ord = await findMaxOrdreForCours(lecon.idCours);
+    lecon.ordre = ord == null ? 1 : ord + 1;
+    //console.log(req.files);
+    console.log(req.file);
+    if (req.file) {
+      const file = req.file;
+
+      // Assuming you have a function to generate a random name for the file
+      const randomFileName = generateRandomFileName(file.originalname);
+
+      // Specify the path where you want to save the file
+      const filePath = path.join(__dirname, "../docs", randomFileName);
+      lecon.contenu = filePath;
+      // Save the file to the specified path
+      fs.writeFileSync(filePath, file.buffer);
+    }
+
     await Lecon.create(lecon);
-    res.json(lecon);
+
+    res.json({ message: "Lecon created successfully", lecon });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 }
 
+function generateRandomFileName(originalFileName) {
+  const fileExtension = path.extname(originalFileName);
+  const randomString = Math.random().toString(36).substring(7);
+  return `${randomString}${fileExtension}`;
+}
+
 async function findMaxOrdreForCours(idCours) {
   try {
-    const maxOrdre = await Lecon.max('ordre', {
+    const maxOrdre = await Lecon.max("ordre", {
       where: { idCours },
-    }) ;
+    });
     return maxOrdre;
   } catch (error) {
     throw new Error(`Error finding max ordre: ${error.message}`);
@@ -41,7 +66,7 @@ async function updateLecon(req, res) {
   try {
     const lecon = await Lecon.findByPk(req.params.id);
     if (!lecon) {
-      res.status(404).json({ error: 'Lecon not found' });
+      res.status(404).json({ error: "Lecon not found" });
       return;
     }
 
@@ -57,12 +82,12 @@ async function deleteLecon(req, res) {
   try {
     const lecon = await Lecon.findByPk(req.params.id);
     if (!lecon) {
-      res.status(404).json({ error: 'Lecon not found' });
+      res.status(404).json({ error: "Lecon not found" });
       return;
     }
 
     await lecon.destroy();
-    res.json({ message: 'Lecon deleted successfully' });
+    res.json({ message: "Lecon deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -230,7 +230,30 @@ async function resetPassword(req, res) {
   }
 }
 
+async function checkResetToken(req, res) {
+  try {
+    const user = await Utilisateur.findOne({
+      where: {
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { [Op.gt]: Date.now() },
+      },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        isValid: false,
+        message: "Password reset token is invalid or has expired.",
+      });
+    }
+
+    return res.json({ isValid: true });
+  } catch (error) {
+    return res.status(500).json({ isValid: false, message: error.message });
+  }
+}
+
 module.exports = {
+  checkResetToken,//done
   registerUser, //done
   loginUser, //done
   getAllUsers, //done

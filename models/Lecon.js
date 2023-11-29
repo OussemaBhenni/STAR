@@ -26,6 +26,10 @@ const Lecon = sequelize.define('lecon', {
     type: DataTypes.INTEGER,
     foreignKey: true,
   },
+  dateCreation: {
+    type: DataTypes.DATE, // Adjust the data type based on your requirements
+    defaultValue: Sequelize.fn('now'), // Set a default value using Sequelize.fn for the current timestamp
+  },
 }, {
   tableName: 'lecon',
   timestamps: false, // Disable timestamps

@@ -28,4 +28,5 @@ router.post('/forgot-password', utilisateurController.forgotPassword);
 router.post('/reset-password/:token', utilisateurController.resetPassword);
 
 router.get('/check-reset-token/:token', utilisateurController.checkResetToken);
+router.get('/getUser/:email', utilisateurController.findUserByEmail);
 module.exports = router;

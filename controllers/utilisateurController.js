@@ -34,7 +34,7 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 
 async function registerUser(req, res) {
   try {
-    const { nom_prenom, adresse, photo, grade, role, email, mdp } = req.body;
+    const { nom_prenom, adresse, photo, grade, role, email, mdp, createdBy } = req.body;
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(mdp, 10);
@@ -48,6 +48,7 @@ async function registerUser(req, res) {
       role,
       email,
       mdp: hashedPassword,
+      createdBy
     });
 
     res.status(201).json({
@@ -81,6 +82,22 @@ async function loginUser(req, res) {
     });
 
     res.json({ Utilisateur: { email: user.email }, token });
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred" });
+  }
+}
+
+async function findUserByEmail(req, res) {
+  try {
+    
+    email = req.params.email;
+    const user = await Utilisateur.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: "Invalid email" });
+    }
+
+    res.json({ Utilisateur: { id: user.idUtilisateur } });
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }
@@ -253,6 +270,7 @@ async function checkResetToken(req, res) {
 }
 
 module.exports = {
+  findUserByEmail,//done
   checkResetToken,//done
   registerUser, //done
   loginUser, //done

@@ -18,6 +18,10 @@ const Cours = sequelize.define('cours', {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
+  langue: {
+    type: DataTypes.TEXT,
+    defaultValue: null,
+  },
   nbrDeVue: {
     type: DataTypes.INTEGER,
     defaultValue: null,

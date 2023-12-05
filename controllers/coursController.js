@@ -7,12 +7,12 @@ const fs = require("fs");
 async function createCours(req, res) {
   try {
     console.log("create");
-    const cours = req.body ;
-//     console.log("Cours Title:", cours.title);
-// console.log("Cours Description:", cours.description);
-// ... log other properties
+    const cours = req.body;
+    //     console.log("Cours Title:", cours.title);
+    // console.log("Cours Description:", cours.description);
+    // ... log other properties
 
-    if (req.file) { 
+    if (req.file) {
       const file = req.file;
 
       // Assuming you have a function to generate a random name for the file
@@ -31,9 +31,9 @@ async function createCours(req, res) {
         res.status(500).json({ message: "Error saving file" });
         return;
       }
-      
+
     }
-    courID =await Cours.create(cours);
+    courID = await Cours.create(cours);
     res.status(200).json(courID);
     console.log("Cours ID:", courID);
     return 99;
@@ -41,7 +41,7 @@ async function createCours(req, res) {
     console.error("Error creating course:", error);
     res.status(500).json({ message: "Error creating course", error: error.message });
   }
-  
+
 }
 function generateRandomFileName(originalFileName) {
   const fileExtension = path.extname(originalFileName);
@@ -52,7 +52,7 @@ function generateRandomFileName(originalFileName) {
 // Get a list of all 'cours'
 async function getAllCours(req, res) {
   try {
-    console.log(Cours,"ttt");
+    console.log(Cours, "ttt");
     const cours = await Cours.findAll(); // Note the 'await' here
     res.status(200).json(cours);
     return cours;
@@ -90,10 +90,24 @@ async function deleteCours(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
+//Find a 'cours' by ID
+async function getCoursById(req, res) {
+  try {
+    const cours = await Cours.findByPk(req.params.id);
+    if (!cours) {
+      return res.status(404).json({ message: 'Cours not found' });
+    }
+    res.status(200).json(cours);
+    return cours;
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 module.exports = {
   createCours,
   getAllCours,
   updateCours,
   deleteCours,
+  getCoursById,
 };

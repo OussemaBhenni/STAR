@@ -5,7 +5,7 @@ const fs = require("fs");
 // Create a new 'lecon'
 async function createLecon(req, res) {
   try {
-    
+
     const lecon = req.body;
     console.log(lecon);
     const ord = await findMaxOrdreForCours(lecon.idCours);
@@ -93,9 +93,21 @@ async function deleteLecon(req, res) {
   }
 }
 
+// Get Lecon by IDCOURS
+async function getAllLeconByCours(req, res) {
+  try {
+    const lecons = await Lecon.findAll({ where: { IdCours: req.params.id } });
+    console.log(lecons);
+    res.status(200).json(lecons);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   createLecon,
   getAllLecon,
   updateLecon,
   deleteLecon,
+  getAllLeconByCours,
 };

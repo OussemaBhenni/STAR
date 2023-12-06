@@ -7,7 +7,7 @@ const leconController = require('../controllers/leconController');
 const router = express.Router();
 
 // Create a new 'lecon'
-router.post('/lecon',  upload.single('file'),leconController.createLecon);
+router.post('/lecon', upload.single('file'), leconController.createLecon);
 
 
 // Get a list of all 'lecon'
@@ -18,5 +18,8 @@ router.put('/lecon/:id', leconController.updateLecon);
 
 // Delete a 'lecon' by ID
 router.delete('/lecon/:id', leconController.deleteLecon);
+
+//Get a list of all 'lecon' by cours
+router.get('/cours/:id/lecons', leconController.getAllLeconByCours);
 
 module.exports = router;

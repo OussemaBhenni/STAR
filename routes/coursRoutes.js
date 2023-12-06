@@ -17,6 +17,8 @@ router.put('/cours/:id', coursController.updateCours);
 
 // Delete a 'cours' by ID
 router.delete('/cours/:id', coursController.deleteCours);
+
+// Get a 'cours' by ID
 router.get('/cours/:id', coursController.getCoursById);
 
 

@@ -26,3 +26,7 @@ http://localhost:3003/api/cours   {
     }
 
     npm install --save-dev mocha chai sinon
+// TEST
+
+  npm test   : hedy bch tessty kol chy
+  npm test -- --grep "registerUser"   : hedy bch testy methode khw 

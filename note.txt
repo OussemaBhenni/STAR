@@ -24,3 +24,5 @@ http://localhost:3003/api/cours   {
         "duree": 33,
         "idCours": 2
     }
+
+    npm install --save-dev mocha chai sinon

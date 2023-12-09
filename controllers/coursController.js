@@ -1,6 +1,7 @@
 const Cours = require('../models/Cours'); // Import the 'cours' model
 const path = require("path");
 const fs = require("fs");
+const { Sequelize, Op } = require('sequelize');
 
 
 // Create a new 'cours'
@@ -103,6 +104,27 @@ async function getCoursById(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
+// Searsh a course
+async function searchCoursByTitle(req, res) {
+  try {
+    console.log('Paramètre title:', req.params.title);
+    const cours = await Cours.findAll({
+      where: {
+        titre: {
+          [Op.like]: '%' + req.params.title + '%'
+        }
+      }
+    });
+    if (!cours || cours.length === 0) {
+      return res.status(404).json({ message: 'No matching cours found' });
+    }
+
+    res.status(200).json(cours);
+    return cours;
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 module.exports = {
   createCours,
@@ -110,4 +132,5 @@ module.exports = {
   updateCours,
   deleteCours,
   getCoursById,
+  searchCoursByTitle,
 };

@@ -19,7 +19,7 @@ async function createLecon(req, res) {
       const randomFileName = generateRandomFileName(file.originalname);
 
       // Specify the path where you want to save the file
-      const filePath = path.join(__dirname, "../docs", randomFileName);
+      const filePath = path.join(__dirname, "../imageDoc", randomFileName);
       lecon.contenu = filePath;
       // Save the file to the specified path
       fs.writeFileSync(filePath, file.buffer);

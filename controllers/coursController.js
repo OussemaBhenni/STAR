@@ -20,7 +20,7 @@ async function createCours(req, res) {
       const randomFileName = generateRandomFileName(file.originalname);
 
       // Specify the path where you want to save the file
-      const filePath = path.join(__dirname, "../images", randomFileName);
+      const filePath = path.join(__dirname, "../imageDoc", randomFileName);
       cours.image = filePath;
       // Save the file to the specified path
       try {

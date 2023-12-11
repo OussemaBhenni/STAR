@@ -8,6 +8,7 @@ const app = express();
 const coursRoutes = require('./routes/coursRoutes'); // Import the 'cours' routes
 const leconRoutes = require('./routes/leconRoutes'); // Import the 'lecon' routes
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 
 app.use(cors());
@@ -50,6 +51,6 @@ sequelize.sync() // This ensures that the table is created if it does not exist
 app.use('/api', coursRoutes);
 app.use('/api', leconRoutes);
 app.use('/api', utilisateurRoutes);
-
+app.use('/api', contactRoutes);
 
 

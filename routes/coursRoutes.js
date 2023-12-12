@@ -15,7 +15,7 @@ router.post('/cours', upload.single('file'), coursController.createCours);
 router.get('/cours', coursController.getAllCours);
 
 // Update an existing 'cours' by ID
-router.put('/cours/:id', coursController.updateCours);
+router.put('/cours/:id', upload.single('image'), coursController.updateCours);
 
 // Delete a 'cours' by ID
 router.delete('/cours/:id', coursController.deleteCours);

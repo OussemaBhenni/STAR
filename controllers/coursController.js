@@ -70,6 +70,27 @@ async function updateCours(req, res) {
     if (!cours) {
       throw new Error('Cours not found');
     }
+    if (req.file) {
+      const file = req.file;
+
+      // Assuming you have a function to generate a random name for the file
+      const randomFileName = generateRandomFileName(file.originalname);
+
+      // Specify the path where you want to save the file
+      const filePath = path.join(__dirname, "../imageDoc", randomFileName);
+      cours.image = filePath;
+      // Save the file to the specified path
+      try {
+        // Save the file to the specified path
+        fs.writeFileSync(filePath, file.buffer);
+      } catch (error) {
+        // Handle the error (log it, send an appropriate response, etc.)
+        console.error("Error saving file:", error);
+        res.status(500).json({ message: "Error saving file" });
+        return;
+      }
+
+    }
     await cours.update(req.body);
     res.status(200).json(cours);
     return cours;

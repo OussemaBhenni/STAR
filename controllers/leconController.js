@@ -103,6 +103,23 @@ async function getAllLeconByCours(req, res) {
     res.status(500).json({ error: error.message });
   }
 }
+async function getLeconById(req, res) {
+  try {
+    const lecon = await Lecon.findOne({
+      where: {
+        idCours: req.params.coursId,
+        idLecon: req.params.leconId
+      }
+    });
+    if (!lecon) {
+      return res.status(404).json({ error: 'Lecon not found' });
+    }
+
+    res.status(200).json(lecon);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
 module.exports = {
   createLecon,
@@ -110,4 +127,5 @@ module.exports = {
   updateLecon,
   deleteLecon,
   getAllLeconByCours,
+  getLeconById
 };

@@ -22,4 +22,6 @@ router.delete('/lecon/:id', leconController.deleteLecon);
 //Get a list of all 'lecon' by cours
 router.get('/cours/:id/lecons', leconController.getAllLeconByCours);
 
+router.get('/lecon/:coursId/:leconId', leconController.getLeconById);
+
 module.exports = router;

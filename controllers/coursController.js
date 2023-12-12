@@ -35,12 +35,12 @@ async function createCours(req, res) {
 
     }
     courID = await Cours.create(cours);
-    res.status(200).json(courID);
+    res.status(200).json({ message: 'Cours created successfully', idCours: courID.idCours });
     console.log("Cours ID:", courID);
     return 99;
   } catch (error) {
     console.error("Error creating course:", error);
-    res.status(500).json({ message: "Error creating course", error: error.message });
+    res.status(500).json({ message: "Error creating course" });
   }
 
 }
@@ -91,8 +91,9 @@ async function updateCours(req, res) {
       }
 
     }
-    await cours.update(req.body);
-    res.status(200).json(cours);
+    cours = await cours.update(req.body);
+    console.log({ idCours: cours.idCours, titre: cours.title });
+    res.status(200).json({ idCours: cours.idCours, titre: cours.title });
     return cours;
   } catch (error) {
     res.status(500).json({ message: error.message });

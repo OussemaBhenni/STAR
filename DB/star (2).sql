@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2023 at 11:29 PM
+-- Generation Time: Dec 12, 2023 at 02:05 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -53,7 +53,7 @@ CREATE TABLE `cours` (
   `idCours` int(11) NOT NULL,
   `titre` varchar(45) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `duree` int(11) DEFAULT NULL,
+  `duree` time(2) DEFAULT NULL,
   `nbrDeVue` int(11) DEFAULT NULL,
   `image` varchar(400) DEFAULT NULL,
   `createdBy` int(11) NOT NULL,
@@ -66,10 +66,11 @@ CREATE TABLE `cours` (
 --
 
 INSERT INTO `cours` (`idCours`, `titre`, `description`, `duree`, `nbrDeVue`, `image`, `createdBy`, `dateCreation`, `langue`) VALUES
-(104, 'Angular', 'Angular (commonly referred to as \"Angular 2+\" or \"Angular 2\") is a TypeScript-based opensource front-end web framework led by the Angular Team at Google and by a community of individuals and corporations to address all of the parts of the developer\'s workflow while building complex web applications. Angular is a complete rewrite from the same team that built AngularJS.\r\n\r\n', 16, 100, 'C:\\Users\\asus\\Desktop\\At.PI\\STAR\\images\\t10djc.png', 4, '2023-12-05 15:21:33', 'English'),
-(105, 'Programmation Orientée-Objet', 'Le langage Java est un langage généraliste de programmation synthétisant les principaux langages existants lors de sa création en  par Sun Microsystems. Il permet une programmation orientée-objet (à l’instar de SmallTalk et, dans une moindre mesure, C++), modulaire (langage ADA) et reprend une syntaxe très proche de celle du langage C.\r\nOutre son orientation objet, le langage Java a l’avantage d’être modulaire (on peut écrire des\r\nportions de code génériques, c-à-d utilisables par plusieurs applications), rigoureux (la plupart des erreurs se produisent à la compilation et non à l’exécution) et portable (un même programme compilé peut s’exécuter sur différents environnements). En contre-partie, les applications Java ont le défaut d’être plus lentes à l’exécution que des applications programmées en C par exemple.', 22, 123, 'C:\\Users\\asus\\Desktop\\At.PI\\STAR\\images\\g9nswj.png', 4, '2023-12-05 15:36:54', 'French'),
-(106, 'Symfony', 'Symfony est un ensemble de composants PHP ainsi qu\'un framework MVC libre écrit en PHP. Il fournit des fonctionnalités modulables et adaptables qui permettent de faciliter et d’accélérer le développement d\'un site web.', 17, 320, 'C:\\Users\\asus\\Desktop\\At.PI\\STAR\\images\\iapvmb.png', 4, '2023-12-05 15:52:03', 'French'),
-(113, 'Test et validation', 'une bonne cours', 14, NULL, 'D:\\Other Works\\STAR\\imageDoc\\x8ovgu.png', 4, '2023-12-11 21:35:44', 'French');
+(104, 'Angular', 'Angular (commonly referred to as \"Angular 2+\" or \"Angular 2\") is a TypeScript-based opensource front-end web framework led by the Angular Team at Google and by a community of individuals and corporations to address all of the parts of the developer\'s workflow while building complex web applications. Angular is a complete rewrite from the same team that built AngularJS.\r\n\r\n', '00:00:16.00', 0, 'C:\\Users\\asus\\Desktop\\At.PI\\STAR\\images\\t10djc.png', 4, '2023-12-05 15:21:33', 'English'),
+(105, 'Programmation Orientée-Objet xx', 'Le langage Java est un langage généraliste de programmation synthétisant les principaux langages existants lors de sa création en  par Sun Microsystems. Il permet une programmation orientée-objet (à l’instar de SmallTalk et, dans une moindre mesure, C++), modulaire (langage ADA) et reprend une syntaxe très proche de celle du langage C.\r\nOutre son orientation objet, le langage Java a l’avantage d’être modulaire (on peut écrire des\r\nportions de code génériques, c-à-d utilisables par plusieurs applications), rigoureux (la plupart des erreurs se produisent à la compilation et non à l’exécution) et portable (un même programme compilé peut s’exécuter sur différents environnements). En contre-partie, les applications Java ont le défaut d’être plus lentes à l’exécution que des applications programmées en C par exemple.', '02:37:00.00', 0, 'C:\\Users\\asus\\Desktop\\At.PI\\STAR\\images\\g9nswj.png', 4, '2023-12-05 15:36:54', 'French'),
+(106, 'Symfony', 'Symfony est un ensemble de composants PHP ainsi qu\'un framework MVC libre écrit en PHP. Il fournit des fonctionnalités modulables et adaptables qui permettent de faciliter et d’accélérer le développement d\'un site web.', '00:00:17.00', 320, 'C:\\Users\\asus\\Desktop\\At.PI\\STAR\\images\\iapvmb.png', 4, '2023-12-05 15:52:03', 'French'),
+(113, 'Test et validation', 'une bonne cours', '00:00:14.00', NULL, 'D:\\Other Works\\STAR\\imageDoc\\x8ovgu.png', 4, '2023-12-11 21:35:44', 'French'),
+(114, 'tttt', 'rtrt', '00:00:01.00', NULL, 'D:\\Other Works\\STAR\\imageDoc\\nxbdc.png', 4, '2023-12-11 23:25:21', 'French');
 
 -- --------------------------------------------------------
 
@@ -170,7 +171,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `cours`
 --
 ALTER TABLE `cours`
-  MODIFY `idCours` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `idCours` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `lecon`

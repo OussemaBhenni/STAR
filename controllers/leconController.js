@@ -69,7 +69,18 @@ async function updateLecon(req, res) {
       res.status(404).json({ error: "Lecon not found" });
       return;
     }
+    if (req.file) {
+      const file = req.file;
+      console.log(file);
+      // Assuming you have a function to generate a random name for the file
+      const randomFileName = generateRandomFileName(file.originalname);
 
+      // Specify the path where you want to save the file
+      const filePath = path.join(__dirname, "../imageDoc", randomFileName);
+      lecon.contenu = filePath;
+      // Save the file to the specified path
+      fs.writeFileSync(filePath, file.buffer);
+    }
     await lecon.update(req.body);
     res.status(200).json(lecon);
   } catch (error) {

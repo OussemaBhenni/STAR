@@ -33,6 +33,32 @@ async function createLecon(req, res) {
     res.status(500).json({ error: error.message });
   }
 }
+// Update an existing 'lecon' by ID
+async function updateLecon(req, res) {
+  try {
+    const lecon = await Lecon.findByPk(req.params.id);
+    if (!lecon) {
+      res.status(404).json({ error: "Lecon not found" });
+      return;
+    }
+    if (req.file) {
+      const file = req.file;
+      console.log(file);
+      // Assuming you have a function to generate a random name for the file
+      const randomFileName = generateRandomFileName(file.originalname);
+
+      // Specify the path where you want to save the file
+      const filePath = path.join(__dirname, "../imageDoc", randomFileName);
+      lecon.contenu = filePath;
+      // Save the file to the specified path
+      fs.writeFileSync  (filePath, file.buffer);
+    }
+    await lecon.update(req.body);
+    res.status(200).json(lecon);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
 function generateRandomFileName(originalFileName) {
   const fileExtension = path.extname(originalFileName);
@@ -61,32 +87,6 @@ async function getAllLecon(req, res) {
   }
 }
 
-// Update an existing 'lecon' by ID
-async function updateLecon(req, res) {
-  try {
-    const lecon = await Lecon.findByPk(req.params.id);
-    if (!lecon) {
-      res.status(404).json({ error: "Lecon not found" });
-      return;
-    }
-    if (req.file) {
-      const file = req.file;
-      console.log(file);
-      // Assuming you have a function to generate a random name for the file
-      const randomFileName = generateRandomFileName(file.originalname);
-
-      // Specify the path where you want to save the file
-      const filePath = path.join(__dirname, "../imageDoc", randomFileName);
-      lecon.contenu = filePath;
-      // Save the file to the specified path
-      fs.writeFileSync(filePath, file.buffer);
-    }
-    await lecon.update(req.body);
-    res.status(200).json(lecon);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
 
 // Delete a 'lecon' by ID
 async function deleteLecon(req, res) {

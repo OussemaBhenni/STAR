@@ -62,6 +62,23 @@ async function getAllCours(req, res) {
   }
 }
 
+// Assuming you have imported your Sequelize model 'Cours' appropriately
+
+async function getAllCoursByUserId(req, res) {
+  try {
+    const cours = await Cours.findAll({
+      where: {
+        createdBy: req.params.id
+      }
+    });
+
+    res.status(200).json(cours);
+    return cours;
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 
 // Update an existing 'cours' by ID
 async function updateCours(req, res) {
@@ -100,6 +117,7 @@ async function updateCours(req, res) {
   }
 }
 
+
 // Delete a 'cours' by ID
 async function deleteCours(req, res) {
   try {
@@ -107,12 +125,18 @@ async function deleteCours(req, res) {
     if (!cours) {
       throw new Error('Cours not found');
     }
-    res.status(200).json(cours);
+
+    // Destroy the course first
     await cours.destroy();
+
+    // Send the response after the course has been successfully destroyed
+    res.status(200).json({ message: 'Cours deleted successfully' });
   } catch (error) {
+    // Handle errors and send an appropriate response
     res.status(500).json({ message: error.message });
   }
 }
+
 //Find a 'cours' by ID
 async function getCoursById(req, res) {
   try {
@@ -163,6 +187,7 @@ async function searchCoursByTitle(req, res) {
 }
 
 module.exports = {
+  getAllCoursByUserId,
   isMine,
   createCours,
   getAllCours,

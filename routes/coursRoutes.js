@@ -14,6 +14,8 @@ router.post('/cours', upload.single('file'), coursController.createCours);
 // Get a list of all 'cours'
 router.get('/cours', coursController.getAllCours);
 
+router.get('/mycours/:id', coursController.getAllCoursByUserId);
+
 // Update an existing 'cours' by ID
 router.put('/cours/:id', upload.single('image'), coursController.updateCours);
 

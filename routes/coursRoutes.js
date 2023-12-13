@@ -23,6 +23,8 @@ router.delete('/cours/:id', coursController.deleteCours);
 // Get a 'cours' by ID
 router.get('/cours/:id', coursController.getCoursById);
 
+router.get('/isMine/:idcours/:id', coursController.isMine);
+
 //search Cours by name
 router.get('/cours/search/:title', coursController.searchCoursByTitle);
 

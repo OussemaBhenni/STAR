@@ -126,6 +126,20 @@ async function getCoursById(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
+//Find a 'cours' by ID
+async function isMine(req, res) {
+  try {
+    const cours = await Cours.findByPk(req.params.idcours);
+    if (!cours) {
+      return res.status(404).json({ message: 'Cours not found' });
+    }
+    r = cours.createdBy == req.params.id;
+    res.status(200).json({ message: r});
+    return cours;
+  } catch (error) {
+    res.status(500).json({ message: r });
+  }
+}
 // Searsh a course
 async function searchCoursByTitle(req, res) {
   try {
@@ -149,6 +163,7 @@ async function searchCoursByTitle(req, res) {
 }
 
 module.exports = {
+  isMine,
   createCours,
   getAllCours,
   updateCours,
